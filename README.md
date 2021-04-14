@@ -4,8 +4,8 @@ A tool to do phishing over SMS. This uses free API from fast2sms to send SMS hav
 
 ## Execution 
 ![installing](/execution.gif)
-* The scenario is picked from the `scenario.txt` file
-* The victim details are put in the `targets.xlsx` file.
+* The scenario is picked from the `scenario.txt` file; you can add any other scenario but to keep the name of the victim include `[NAME]` in the proper location. 
+* The victim details are put in the `targets.xlsx` file. Do not need to add country code it is automatically picked by fast2sms api.
 * The flask application is runing on the `port-5000` in a seperate thread and the ngrok tunnel run directly as a child process. If you have a paid version of ngrok then use it to get a White CNAME to make the URL more authentic. 
 
 
