@@ -2,7 +2,7 @@
 A tool to do phishing over SMS. This uses free API from fast2sms to send SMS having ngrok tunnel which leads to phishing pages over flask. 
 
 ## How to Install
-1. Make a free account in fast2sms 
+1. Make a free account in fast2sms ![Fast2sms](https://www.fast2sms.com/Fast2SMS-logo-red.png)
 2. get the api token and put in the token variable
 3. install python3
 4. run the following commands 
