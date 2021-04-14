@@ -10,7 +10,7 @@ A tool to do phishing over SMS. This uses free API from fast2sms to send SMS hav
 >
 >pip3 install -r requirements.txt
 >
-
+![installing](/install.gif)
 
 ## Execution 
 The scenario is picked from the `scenario.txt` file and the victim details are put in the `targets.xlsx` file.
