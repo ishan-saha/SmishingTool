@@ -1,0 +1,4 @@
+requests
+art
+colorama
+openpyxl
