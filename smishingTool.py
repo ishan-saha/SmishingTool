@@ -10,7 +10,7 @@ connection = sqlite3.connect("dbz")
 Cursor = connection.cursor()
 inspect_url = "http://localhost:4040/"
 filename = "targets.xlsx"
-token = "<Token>"  # change this to your token
+token = "YOUR_API_KEY"  # change this to your token
 app = flask(__name__)
 @app.route("/")
 def index():
@@ -32,11 +32,19 @@ def API(target):
         connection.commit()
     except Exception as e:
         pass
-    url =json.loads(requests.get(inspect_url+"api/tunnels").text)['tunnels'][0]['public_url']+"/?login="+digest
-    msg = message(target[0]) + "Click here to verify " + url
-    api_endpoint = "https://www.fast2sms.com/dev/bulkV2?authorization={0}&route=q&message={1}&language=english&flash=0&numbers={2}".format(token,msg,'8178682111')
-    response = requests.get(api_endpoint)
-    return response.status_code
+    import requests
+
+    url = "https://www.fast2sms.com/dev/bulkV2"
+
+    querystring = {"authorization":token,"message":"This is test message","language":"english","route":"q","numbers":str(target[1])}
+
+    headers = {
+        'cache-control': "no-cache"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(response.text)
 
 def message(name):
     with open("scenario.txt",'r') as file:
@@ -87,10 +95,11 @@ def main():
         print(format_text("Wait:","10 seconds",1))
         time.sleep(10)
         print(format_text("Note:","Starting ngrok tunnel...",1))
-        ngrok = subprocess.Popen(['./ngrok','http','http://localhost:5000'],stdout=subprocess.PIPE)
+        ngrok = subprocess.Popen(['ngrok','http','http://localhost:5000'],stdout=subprocess.PIPE)
         time.sleep(10)
         for target_data in numbers(filename):
             print(format_text("Note:","Preparing the scenario for "+target_data[0],1))
+            print(target_data)
             API(target_data)
     except Exception as e: 
         print(format_text("Error: ",str(e),1))
